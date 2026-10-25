@@ -1,0 +1,65 @@
+{
+  "name": "screensense-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A little companion that sees what you see.",
+  "main": "dist-electron/electron/main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.electron.json --noEmit",
+    "build": "npm run typecheck && vite build && npm run build:electron",
+    "build:electron": "tsc -p tsconfig.electron.json && node scripts/preload.mjs",
+    "start": "electron .",
+    "test": "tsx --test tests/*.test.ts",
+    "dist": "npm run build && electron-builder",
+    "test:desktop": "npm run build && electron scripts/smoke.cjs",
+    "sign:dev": "node scripts/sign-dev.mjs",
+    "test:vision": "npm run build:electron && electron scripts/verify-vision.cjs"
+  },
+  "dependencies": {
+    "@google/genai": "2.31.0",
+    "dotenv": "18.0.9",
+    "lucide-react": "1.61.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.3.3",
+    "@types/node": "26.6.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "electron": "45.0.0",
+    "electron-builder": "26.18.0",
+    "tailwindcss": "4.3.3",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "vite": "8.3.5"
+  },
+  "build": {
+    "appId": "ai.screensense.desktop",
+    "productName": "ScreenSense AI",
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        "dmg"
+      ],
+      "extendInfo": {
+        "NSScreenCaptureUsageDescription": "ScreenSense captures a display only when you choose Analyze Screen."
+      }
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "directories": {
+      "output": "release"
+    }
+  }
+}
