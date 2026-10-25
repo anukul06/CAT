@@ -10,7 +10,7 @@ export function apiError(error:unknown):Error{
  const {httpStatus:status,providerStatus}=apiDiagnostic(error);
  const suffix=typeof status==='number'?` (HTTP ${status}${providerStatus?' · '+providerStatus:''})`:'';
  const text=error instanceof Error?error.message:String(error);
- if(status&&status>=500)return Error('Google is temporarily unavailable'+suffix+'. Your screenshot is still here; retry when ready.');
+ if(status&&status>=500)return Error('Google is temporarily unavailable'+suffix+'. Your input preview is still available; retry when ready.');
  if(/No answer/.test(text))return Error(/MAX_TOKENS/.test(text)?'Gemma reached its response limit before answering. Try a shorter question.':'Gemma returned no usable answer. The response may have been blocked; try another question or image.');
  if(status===401||status===403||/API_KEY_INVALID|API key not valid/i.test(text))return Error('Google rejected the API key or access'+suffix+'. Check GEMINI_API_KEY in .env, API restrictions, and your AI Studio account. Restart after changes.');
  if(status===400)return Error('Google rejected this request'+suffix+'. Check your Gemma configuration and retry with a fresh question or screenshot.');

@@ -15,7 +15,10 @@
     "dist": "npm run build && electron-builder",
     "test:desktop": "npm run build && electron scripts/smoke.cjs",
     "sign:dev": "node scripts/sign-dev.mjs",
-    "test:vision": "npm run build:electron && electron scripts/verify-vision.cjs"
+    "test:vision": "npm run build:electron && electron scripts/verify-vision.cjs",
+    "package:mac": "npm run build && electron-builder --mac --dir",
+    "test:watch:live": "npm run build:electron && electron scripts/verify-watch.cjs",
+    "test:log:live": "npm run build:electron && electron scripts/verify-log.cjs"
   },
   "dependencies": {
     "@google/genai": "2.31.0",
@@ -39,7 +42,7 @@
   },
   "build": {
     "appId": "ai.screensense.desktop",
-    "productName": "ScreenSense AI",
+    "productName": "Desktop PA",
     "files": [
       "dist/**/*",
       "dist-electron/**/*"
@@ -50,8 +53,11 @@
         "dmg"
       ],
       "extendInfo": {
-        "NSScreenCaptureUsageDescription": "ScreenSense captures a display only when you choose Analyze Screen."
-      }
+        "NSScreenCaptureUsageDescription": "Desktop PA captures a display only when you choose Analyze Screen.",
+        "NSMicrophoneUsageDescription": "Desktop PA uses your microphone only when you record a local voice note."
+      },
+      "entitlements": "electron/entitlements.mac.plist",
+      "entitlementsInherit": "electron/entitlements.mac.plist"
     },
     "win": {
       "target": [

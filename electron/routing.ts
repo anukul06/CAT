@@ -13,4 +13,4 @@ export function route(text:string,hasImage:boolean,now=Date.now()):Intent{
  if(/^(?:(?:show|list)(?: me)?\s+(?:my\s+)?memor(?:y|ies)|what do you remember(?: about me)?)[?.!]?$/i.test(q))return {agent:'MemoryAgent',action:'list'};
  return {agent:hasImage?'VisionAgent':'ResearchAgent',action:'answer'};
 }
-export const agentDescription:Record<AgentName,string>={Coordinator:'Routing your request',VisionAgent:'Understanding your snapshot',TaskAgent:'Managing your local tasks',ResearchAgent:'Answering with Gemma · no live web',MemoryAgent:'Working with approved memories'};
+export const agentDescription:Record<AgentName,string>={AgentWatch:'Inspecting an approved agent snapshot',Coordinator:'Routing your request',VisionAgent:'Understanding your snapshot',TaskAgent:'Managing your local tasks',ResearchAgent:'Answering with Gemma · no live web',MemoryAgent:'Working with approved memories'};

@@ -33,7 +33,7 @@ export class Coordinator{
   if(intent.action==='clarify')answer=intent.text;
   else if(intent.action==='create'){
    const task=await this.store.create({title:intent.title,dueAt:intent.dueAt},!!intent.dueAt);
-   answer=task.dueAt?`Reminder saved: ${task.title}\n${new Date(task.dueAt).toLocaleString()} (${task.timezone}). Keep ScreenSense running for notifications; missed reminders are checked next launch.`:`Task created: ${task.title}`;
+   answer=task.dueAt?`Reminder saved: ${task.title}\n${new Date(task.dueAt).toLocaleString()} (${task.timezone}). Keep Desktop PA running for notifications; missed reminders are checked next launch.`:`Task created: ${task.title}`;
   }else if(intent.action==='list'){
    const tasks=this.store.snapshot().tasks;answer=tasks.length?tasks.map((t,i)=>`${i+1}. ${t.completedAt?'✓':'○'} ${t.title}${t.dueAt?' · '+new Date(t.dueAt).toLocaleString():''}`).join('\n'):'No tasks yet. Try “Add task review my demo.”';
   }else{
