@@ -1,4 +1,4 @@
-# ScreenSense AI
+# Desktop PA
 
 **A little companion that sees what you see.**
 
