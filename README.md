@@ -188,3 +188,8 @@ If the agent doesn't produce a log, enable its own output-logging option before 
 Click **Review excerpt for analysis** to freeze the text shown. New file output cannot silently replace that frozen excerpt. Inspect it for private data, then **Approve & analyze** or **Approve & compare**. Only the approved excerpt (and the previous summary if comparing) is sent to Gemma. The local summary records that its source was a log; raw excerpts and file paths are not saved in analysis history. Status is a fallible interpretation of the supplied output, not hidden process access. You can discard an excerpt without sending it.
 
 Run `npm run test:log:live` for opt-in real Gemma analysis/comparison of a controlled log fixture, without reading your actual terminal. Local tests cover bounded file reads, ANSI/key redaction, file replacement, frozen approvals, and raw-log-free persistence.
+
+
+## License
+
+Desktop PA is open source under the [MIT License](LICENSE).
